@@ -1,96 +1,638 @@
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-        }
 
-        /* HEADER */
-        header {
-            background-color: #ffffff;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            margin-left: 20px;
-            font-weight: 500;
-        }
-
-        nav a:hover {
-            color: #007bff;
-        }
-
-        /* FOOTER */
-        footer {
-            background-color: #ffffff;
-            text-align: center;
-            padding: 20px 10px;
-            margin-top: 40px;
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-            font-size: 0.9rem;
-            color: #555;
-        }
-        /* :::::::::::::  table */
-  .table-container { 
-    background:#fff; 
-    padding:20px;
-     border-radius:10px;
-    margin:auto; 
-    box-shadow:0 2px 6px rgba(0,0,0,0.1); 
-}
-  h2 {
-     margin-top:0; 
-    color:#333; 
-}
-  table { 
-    width:100%; 
-    border-collapse:collapse; 
-}
-  th, td { 
-    border:1px solid #ddd; 
-    padding:10px; 
-    text-align:left; 
-}
-  th { 
-    background:#f0f0f0; 
-}
-  tr:hover { 
-    background:#fafafa; 
+/* ///// */
+/* ========================================
+   GENERAL STYLES
+======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.edit-btn, .delete-btn {
-padding:6px 12px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-font-size:0.9rem;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
 }
-.edit-btn { background:#4caf50; 
-    color:white;
- }
-.delete-btn { background:#e53935; 
-    color:white;
-     margin-left:5px;
-     }
-.edit-btn:hover, .delete-btn:hover {
-     opacity:0.9;
-     }
 
-     .buttons{
-        display:  flex;
-        flex-direction: row;
+/* ========================================
+   FORM CONTAINER
+======================================== */
+.form-container {
+    max-width: 800px;
+    margin: 30px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.5s ease-out;
+}
 
-     }
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
+.form-container h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 15px;
+}
+
+/* ========================================
+   FORM STYLES
+======================================== */
+.course-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #555;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-group label::before {
+    content: '📝';
+    font-size: 16px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="file"],
+.form-group textarea,
+.form-group select {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+.form-group input[type="file"] {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.form-group input[type="file"]::file-selector-button {
+    padding: 8px 16px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+}
+
+.form-group small {
+    color: #999;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* ========================================
+   ERROR MESSAGES
+======================================== */
+.error {
+    color: #dc3545;
+    font-size: 13px;
+    margin-top: 5px;
+    padding: 8px 12px;
+    background: #ffe6e6;
+    border-left: 4px solid #dc3545;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.submit-btn,
+.cancel-btn {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    background: #f0f0f0;
+    color: #666;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-btn:hover {
+    background: #e0e0e0;
+    transform: translateY(-3px);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ========================================
+   TABLE CONTAINER
+======================================== */
+.table-container {
+    max-width: 1400px;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.table-container h2 {
+    color: #667eea;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* ========================================
+   TABLE STYLES
+======================================== */
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.course-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.course-table thead th {
+    padding: 18px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.course-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.course-table tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.course-table tbody tr:hover {
+    background: #f0f4ff;
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.course-table tbody td {
+    padding: 18px 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.course-table tbody td img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.course-table tbody td img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   NIVEAU BADGES
+======================================== */
+.niveau-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.niveau-debutant {
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #28a745;
+}
+
+.niveau-intermediaire {
+    background: #fff3cd;
+    color: #856404;
+    border: 2px solid #ffc107;
+}
+
+.niveau-avance {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #dc3545;
+}
+
+/* ========================================
+   ACTION BUTTONS IN TABLE
+======================================== */
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.edit-btn {
+    background: #007bff;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.4);
+}
+
+/* ========================================
+   PRIMARY BUTTON (Add Course)
+======================================== */
+.btn-primary {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.empty-state p {
+    font-size: 18px;
+    color: #6c757d;
+    margin: 10px 0;
+}
+
+/* ========================================
+   ALERT MESSAGES
+======================================== */
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 5px solid;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border-color: #28a745;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #dc3545;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+@media (max-width: 1200px) {
+    .course-table {
+        font-size: 13px;
+    }
+    
+    .course-table thead th,
+    .course-table tbody td {
+        padding: 12px 10px;
+    }
+}
+
+@media (max-width: 992px) {
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    .course-table {
+        min-width: 900px;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        padding: 25px;
+        margin: 15px;
+    }
+    
+    .table-container {
+        padding: 20px;
+        margin: 15px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .submit-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+    
+    .buttons {
+        flex-direction: column;
+    }
+    
+    .edit-btn,
+    .delete-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-container h2,
+    .table-container h2 {
+        font-size: 22px;
+    }
+    
+    body {
+        padding: 10px;
+    }
+    
+    .course-table tbody td img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* ========================================
+   LOADING ANIMATION (Optional)
+======================================== */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   SCROLLBAR CUSTOM
+======================================== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5568d3;
+}
+
+/* ========================================
+   IMAGE PREVIEW (For Edit Page)
+======================================== */
+.image-preview {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.image-preview img:hover {
+    transform: scale(1.05);
+}
+
+/* ========================================
+   HEADER ACTIONS (For courses_list.php)
+======================================== */
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.course-count {
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* ========================================
+   TRANSITIONS & ANIMATIONS
+======================================== */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+    transition: all 0.3s ease;
+}
