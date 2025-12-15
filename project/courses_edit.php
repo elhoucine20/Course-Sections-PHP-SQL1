@@ -31,7 +31,7 @@ $sql = "SELECT * FROM courses WHERE id = '$id'";
 $result = mysqli_query($connect, $sql);//exucute dyal query f base de donnees
 
 if (mysqli_num_rows($result) > 0) {
-    $course = mysqli_fetch_assoc($result);//set les donnees sous form table (key value)
+    $course = mysqli_fetch_assoc($result);//set les donnees sous form table assocaitive (key value)
 } else {
     header("Location: courses_list.php?error=not_found");
     exit();
@@ -127,13 +127,13 @@ if (isset($_POST['created_at'])) {
 ?>
 
 <section class="form-container">
-    <h2>Modifier le Cours #<?php echo $id; ?></h2>
+   <h2>Modifier le Cours #<?php echo $id; ?></h2>
 
     <form action="" method="POST" class="course-form">
 
         <!-- Title -->
         <div class="form-group">
-            <label for="title">Titre *</label>
+            <label for="title">Titre </label>
             <input type="text" 
                    id="title" 
                    name="title" 
@@ -148,7 +148,7 @@ if (isset($_POST['created_at'])) {
 
         <!-- Description -->
         <div class="form-group">
-            <label for="description">Description *</label>
+            <label for="description">Description </label>
             <textarea id="description" 
                       name="description" 
                       rows="5"
@@ -162,9 +162,9 @@ if (isset($_POST['created_at'])) {
 
         <!-- Level -->
         <div class="form-group">
-            <label for="level">Level *</label>
+            <label for="level">Level </label>
             <select id="level" name="level">
-                <option value="">-- Choisir le level --</option>
+                <option value=""> saisir level  </option>
                 
                 <option value="Débutant" <?php if ($level == "Débutant") echo "selected"; ?>>
                     Débutant

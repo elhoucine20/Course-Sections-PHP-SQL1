@@ -1,6 +1,5 @@
 
 
-/* ///// */
 /* ========================================
    GENERAL STYLES
 ======================================== */
@@ -320,7 +319,7 @@ a {
 /* ========================================
    NIVEAU BADGES
 ======================================== */
-.niveau-badge {
+/* .niveau-badge {
     display: inline-block;
     padding: 6px 14px;
     border-radius: 20px;
@@ -334,9 +333,9 @@ a {
     background: #d4edda;
     color: #155724;
     border: 2px solid #28a745;
-}
+} */
 
-.niveau-intermediaire {
+/* .niveau-intermediaire {
     background: #fff3cd;
     color: #856404;
     border: 2px solid #ffc107;
@@ -346,19 +345,19 @@ a {
     background: #f8d7da;
     color: #721c24;
     border: 2px solid #dc3545;
-}
+} */
 
 /* ========================================
    ACTION BUTTONS IN TABLE
 ======================================== */
-.buttons {
+/* .buttons {
     display: flex;
     gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
-}
+} */
 
-.edit-btn,
+/* .edit-btn,
 .delete-btn {
     padding: 9px 18px;
     border-radius: 6px;
@@ -370,9 +369,9 @@ a {
     align-items: center;
     gap: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+} */
 
-.edit-btn {
+/* .edit-btn {
     background: #007bff;
     color: white;
 }
@@ -381,9 +380,9 @@ a {
     background: #0056b3;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
-}
+} */
 
-.delete-btn {
+/* .delete-btn {
     background: #dc3545;
     color: white;
 }
@@ -392,7 +391,7 @@ a {
     background: #c82333;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(220, 53, 69, 0.4);
-}
+} */
 
 /* ========================================
    PRIMARY BUTTON (Add Course)
@@ -421,24 +420,24 @@ a {
 /* ========================================
    EMPTY STATE
 ======================================== */
-.empty-state {
+/* .empty-state {
     text-align: center;
     padding: 60px 20px;
     background: #f8f9fa;
     border-radius: 10px;
     margin: 20px 0;
-}
+} */
 
-.empty-state p {
+/* .empty-state p {
     font-size: 18px;
     color: #6c757d;
     margin: 10px 0;
-}
+} */
 
 /* ========================================
    ALERT MESSAGES
 ======================================== */
-.alert {
+/* .alert {
     padding: 15px 20px;
     border-radius: 8px;
     margin: 20px 0;
@@ -447,9 +446,9 @@ a {
     align-items: center;
     gap: 12px;
     animation: slideDown 0.5s ease-out;
-}
+} */
 
-@keyframes slideDown {
+/* @keyframes slideDown {
     from {
         opacity: 0;
         transform: translateY(-20px);
@@ -470,7 +469,7 @@ a {
     background: #f8d7da;
     color: #721c24;
     border-color: #dc3545;
-}
+} */
 
 /* ========================================
    RESPONSIVE DESIGN
@@ -516,9 +515,9 @@ a {
         width: 100%;
     }
     
-    .buttons {
+    /* .buttons {
         flex-direction: column;
-    }
+    } */
     
     .edit-btn,
     .delete-btn {
@@ -546,7 +545,7 @@ a {
 /* ========================================
    LOADING ANIMATION (Optional)
 ======================================== */
-.loading {
+/* .loading {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -558,12 +557,12 @@ a {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
-}
+} */
 
 /* ========================================
    SCROLLBAR CUSTOM
 ======================================== */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
@@ -580,34 +579,34 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #5568d3;
-}
+} */
 
 /* ========================================
    IMAGE PREVIEW (For Edit Page)
 ======================================== */
-.image-preview {
+/* .image-preview {
     margin: 15px 0;
     padding: 15px;
     background: #f8f9fa;
     border-radius: 10px;
     text-align: center;
-}
+} */
 
-.image-preview img {
+/* .image-preview img {
     max-width: 250px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
-}
+} */
 
-.image-preview img:hover {
+/* .image-preview img:hover {
     transform: scale(1.05);
-}
+} */
 
 /* ========================================
    HEADER ACTIONS (For courses_list.php)
 ======================================== */
-.header-actions {
+/* .header-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -620,7 +619,7 @@ a {
     font-size: 16px;
     color: #666;
     font-weight: 500;
-}
+} */
 
 /* ========================================
    TRANSITIONS & ANIMATIONS

@@ -6,12 +6,6 @@ if (!isset($_GET['id'])) {
     header("Location: courses_list.php");
     exit();
 }
-
-// if (empty($_GET['id'])) {
-//     header("Location: courses_list.php");
-//     exit();
-// }
-
 $id = intval($_GET['id']); // transform id to int (security)
 
 // 1.  course_id to NULL pour les sections liee
@@ -27,8 +21,7 @@ if ($resultDelete) {
     header("Location: courses_list.php?message=deleted");
     exit();
 } else {
-    header("Location: courses_list.php?error=delete_failed");
+    header("Location: courses_list.php?error=delete invalid");
     exit();
 }
-
 ?>

@@ -84,7 +84,7 @@ include "header.php";
 
         <!-- Title -->
         <div class="form-group">
-            <label for="title">Titre *</label>
+            <label for="title">Titre </label>
             <input type="text" 
                    id="title" 
                    name="title" 
@@ -99,7 +99,7 @@ include "header.php";
 
         <!-- Description -->
         <div class="form-group">
-            <label for="description">Description *</label>
+            <label for="description">Description </label>
             <textarea id="description" 
                       name="description" 
                       rows="5"
@@ -113,9 +113,9 @@ include "header.php";
 
         <!-- level -->
         <div class="form-group">
-            <label for="niveau">Niveau *</label>
+            <label for="niveau">level </label>
             <select id="niveau" name="niveau">
-                <option value="">-- Choisir le niveau --</option>
+                <option value="">saisir  level</option>
                 
                 <option value="Débutant" 
                     <?php 
