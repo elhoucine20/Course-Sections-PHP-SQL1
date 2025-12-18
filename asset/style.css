@@ -317,83 +317,6 @@ a {
 }
 
 /* ========================================
-   NIVEAU BADGES
-======================================== */
-/* .niveau-badge {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.niveau-debutant {
-    background: #d4edda;
-    color: #155724;
-    border: 2px solid #28a745;
-} */
-
-/* .niveau-intermediaire {
-    background: #fff3cd;
-    color: #856404;
-    border: 2px solid #ffc107;
-}
-
-.niveau-avance {
-    background: #f8d7da;
-    color: #721c24;
-    border: 2px solid #dc3545;
-} */
-
-/* ========================================
-   ACTION BUTTONS IN TABLE
-======================================== */
-/* .buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-} */
-
-/* .edit-btn,
-.delete-btn {
-    padding: 9px 18px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-} */
-
-/* .edit-btn {
-    background: #007bff;
-    color: white;
-}
-
-.edit-btn:hover {
-    background: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
-} */
-
-/* .delete-btn {
-    background: #dc3545;
-    color: white;
-}
-
-.delete-btn:hover {
-    background: #c82333;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.4);
-} */
-
-/* ========================================
    PRIMARY BUTTON (Add Course)
 ======================================== */
 .btn-primary {
@@ -417,59 +340,18 @@ a {
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
-/* ========================================
-   EMPTY STATE
-======================================== */
-/* .empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    margin: 20px 0;
-} */
 
-/* .empty-state p {
-    font-size: 18px;
-    color: #6c757d;
-    margin: 10px 0;
-} */
+/* ::::::::::::::::::::::::::: LOG IN::::::::::::::::::::*/
 
-/* ========================================
-   ALERT MESSAGES
-======================================== */
-/* .alert {
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-    border-left: 5px solid;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    animation: slideDown 0.5s ease-out;
-} */
 
-/* @keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-.alert-success {
-    background: #d4edda;
-    color: #155724;
-    border-color: #28a745;
-}
 
-.alert-danger {
-    background: #f8d7da;
-    color: #721c24;
-    border-color: #dc3545;
-} */
+
+
+
+
+
+
 
 /* ========================================
    RESPONSIVE DESIGN

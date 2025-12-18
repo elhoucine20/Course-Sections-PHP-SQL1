@@ -24,7 +24,7 @@ $dataa = mysqli_fetch_all($produis, MYSQLI_ASSOC);
         </thead>
 
         <tbody>
-            <?php foreach($produis as $elemnt){ ?>
+            <?php foreach($dataa as $elemnt){ ?>
             <tr>
                 <td><?= $elemnt['id'] ?></td>
                 <td><?= $elemnt['title'] ?></td>
@@ -42,7 +42,10 @@ $dataa = mysqli_fetch_all($produis, MYSQLI_ASSOC);
                     </a>
                 </td>
             </tr>
-            <?php } ?>
+            <?php } 
+            #fin 
+            //fin 
+            ?>
         </tbody>
     </table>
 

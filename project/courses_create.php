@@ -7,45 +7,35 @@ include "header.php";
     <h2>Ajouter/Modifier un Cours</h2>
 
     <?php
-    // fonction dyal validation des donnees
-    function Valid_form($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
     $errors = [];
     
-    // Variables pour garder les valeurs
+    // Variables pour stockee les valeurs
     $title = "";
     $description = "";
-    $niveau = "";
+    $level = "";
     $created_at = "";
 
     if (isset($_POST['submit'])) {
         
         // Validation dyal title
-        if (empty($_POST['title'])) {
-            $errors['title'] = "titre invalide";
-        } else {
-            $title = Valid_form($_POST['title']);
+        $title = trim($_POST['title']);
+        if (empty($title)) {
+            $errors['title'] = "title invalide";
         }
 
-        // Validation dyal Description
-        if (empty($_POST['description'])) {
-            $errors['description'] = "Description invalide";
+        // validation dyal description
+            $description = trim($_POST['description']);
+        if (empty($description)) {
+            $errors['description'] = "description invalide";
+        } 
+        
+        // Validation dyal level
+        if (empty($_POST['level'])) {
+            $errors['level'] = "level est null";
+        } else if (in_array($_POST['level'], ["Débutant", "Intermédiaire", "Avancé"])) {
+            $level = trim($_POST['level']);
         } else {
-            $description = Valid_form($_POST['description']);
-        }
-
-        // Validation dyal niveau
-        if (empty($_POST['niveau'])) {
-            $errors['niveau'] = "Le niveau est null";
-        } else if (in_array($_POST['niveau'], ["Débutant", "Intermédiaire", "Avancé"])) {
-            $niveau = Valid_form($_POST['niveau']);
-        } else {
-            $errors['niveau'] = "Niveau invalide";
+            $errors['level'] = "level invalide";
         }
 
         // date de creation
@@ -55,21 +45,21 @@ include "header.php";
             $created_at = $_POST['created_at'];
         }
 
-        // INSERT dans la DATABASE
+        // INSERT en la DATABASE
         if (empty($errors)) {
             $sql = "INSERT INTO courses (Title, Description, level, created_at)
-                    VALUES ('$title', '$description', '$niveau', '$created_at')";
+                    VALUES ('$title', '$description', '$level', '$created_at')";
 
             if (mysqli_query($connect, $sql)) {
                 echo "<p style='color:green; padding:10px; background:#d4edda; border-radius:5px;'>
-                        l'ajout est succes !
+                        l'ajout est valide 
                       </p>";
-                
                 // Reset les variables
                 $title = "";
                 $description = "";
-                $niveau = "";
+                $level = "";
                 $created_at = "";
+
             } else {
                 echo "<p style='color:red; padding:10px; background:#f8d7da; border-radius:5px;'>
                         Erreur de l'ajout en database : " . mysqli_error($connect) . "
@@ -79,7 +69,7 @@ include "header.php";
     }
     ?>
 
-    <!-- FORM -->
+    <!-- form -->
     <form action="courses_create.php" method="POST" class="course-form">
 
         <!-- Title -->
@@ -113,13 +103,13 @@ include "header.php";
 
         <!-- level -->
         <div class="form-group">
-            <label for="niveau">level </label>
-            <select id="niveau" name="niveau">
+            <label for="level">level </label>
+            <select id="level" name="level">
                 <option value="">saisir  level</option>
                 
                 <option value="Débutant" 
                     <?php 
-                    if ($niveau == "Débutant") {
+                    if ($level == "Débutant") {
                         echo "selected";
                     }
                     ?>>
@@ -128,7 +118,7 @@ include "header.php";
                 
                 <option value="Intermédiaire" 
                     <?php 
-                    if ($niveau == "Intermédiaire") {
+                    if ($level == "Intermédiaire") {
                         echo "selected";
                     }
                     ?>>
@@ -137,7 +127,7 @@ include "header.php";
                 
                 <option value="Avancé" 
                     <?php 
-                    if ($niveau == "Avancé") {
+                    if ($level == "Avancé") {
                         echo "selected";
                     }
                     ?>>
@@ -145,15 +135,15 @@ include "header.php";
                 </option>
             </select>
             <?php 
-            if (isset($errors['niveau'])) {
-                echo "<p class='error'>" . $errors['niveau'] . "</p>";
+            if (isset($errors['level'])) {
+                echo "<p class='error'>" . $errors['level'] . "</p>";
             }
             ?>
         </div>
 
         <!-- Date -->
         <div class="form-group">
-            <label for="created_at">Date de creation (optionnel)</label>
+            <label for="created_at">Date de creation </label>
             <input type="date" 
                    id="created_at" 
                    name="created_at"
