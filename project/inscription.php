@@ -125,5 +125,28 @@ include "config.php";
 </body>
 </html>
 
+<?php
+  if(isset($_POST['inscription'])){
+    $name=$_POST['username'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
+
+     if(empty($name)){
+    echo "name est invalid";
+  }
+    if(empty($email)){
+    echo "email est invalid";
+  }
+    if(empty($password)){
+    echo "password est invalid";
+  }
+
+  $sqll ="INSERT INTO users(name,email,password)
+                       value('$name','$email','$password')";
+  $resultt = mysqli_query($connect,$sqll);
+
+  }
+?>
+
 
 
