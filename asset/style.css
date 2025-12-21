@@ -340,19 +340,6 @@ a {
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
-
-/* ::::::::::::::::::::::::::: LOG IN::::::::::::::::::::*/
-
-
-
-
-
-
-
-
-
-
-
 /* ========================================
    RESPONSIVE DESIGN
 ======================================== */
@@ -396,11 +383,7 @@ a {
     .cancel-btn {
         width: 100%;
     }
-    
-    /* .buttons {
-        flex-direction: column;
-    } */
-    
+
     .edit-btn,
     .delete-btn {
         width: 100%;
@@ -425,85 +408,6 @@ a {
 }
 
 /* ========================================
-   LOADING ANIMATION (Optional)
-======================================== */
-/* .loading {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-} */
-
-/* ========================================
-   SCROLLBAR CUSTOM
-======================================== */
-/* ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #667eea;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #5568d3;
-} */
-
-/* ========================================
-   IMAGE PREVIEW (For Edit Page)
-======================================== */
-/* .image-preview {
-    margin: 15px 0;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    text-align: center;
-} */
-
-/* .image-preview img {
-    max-width: 250px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
-} */
-
-/* .image-preview img:hover {
-    transform: scale(1.05);
-} */
-
-/* ========================================
-   HEADER ACTIONS (For courses_list.php)
-======================================== */
-/* .header-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.course-count {
-    font-size: 16px;
-    color: #666;
-    font-weight: 500;
-} */
-
-/* ========================================
    TRANSITIONS & ANIMATIONS
 ======================================== */
 * {
@@ -516,4 +420,19 @@ input,
 select,
 textarea {
     transition: all 0.3s ease;
+}
+
+/* style btn enrollemnt courses_list.php */
+.btn-enroll {
+    background: #10b981;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.btn-enroll:hover {
+    background: #059669;
 }

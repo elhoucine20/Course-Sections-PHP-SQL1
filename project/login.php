@@ -1,18 +1,17 @@
-
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion</title>
-    <style>
+    <title>Connexion</title> -->
+ <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    }
         .login-box {
             background: #fff;
             padding: 25px;
@@ -41,8 +40,20 @@
             color: red;
             text-align: center;
         }
-    </style>
-</head>
+     .footer-text {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 13px;
+      color: #6b7280;
+    }
+     .footer-text a {
+      color: #4f46e5;
+      text-decoration: none;
+      font-weight: bold;
+    }
+</style>
+
+<!-- </head> -->
 <body>
 
 <div class="login-box">
@@ -51,14 +62,42 @@
     <form method="post">
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Mot de passe" required>
-        <button type="submit">Se connecter</button>
+        <button type="submit" name="login">Se connecter</button>
+         <div class="footer-text">
+           <p>Don't have an account? <a href="inscription.php">inscription</a></p>
+        </div>
     </form>
 </div>
 
 </body>
 </html>
 
-
 <?php
- 
+    session_start();
+    include "config.php";
+    
+
+    // echo session_id();
+
+    if(isset($_POST['login'])){
+
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $sql = "SELECT * FROM users WHERE email = '$email' and password = '$password'";
+
+        $result = mysqli_query($connect,$sql);
+        if(mysqli_num_rows($result) == 1){
+            $user = mysqli_fetch_assoc($result);
+
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['emai_l'] = $email;
+            // header("location: courses_list.php");
+            header("location: courses_list.php");
+        }
+        else{
+            echo "invalid email or password";
+        }
+    }
+
 ?>

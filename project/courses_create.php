@@ -1,5 +1,7 @@
 <?php
 include "config.php";
+include "sessions.php";
+
 include "header.php";
 ?>
 
@@ -67,6 +69,7 @@ include "header.php";
             }
         }
     }
+ 
     ?>
 
     <!-- form -->

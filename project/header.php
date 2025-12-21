@@ -1,24 +1,546 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Courses Website</title>
-    <link rel="stylesheet" href="../asset/style.css">
+    <title>Mini-LMS Platform</title>
+    <!-- <link rel="stylesheet" href="asset/style.css"> -->
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f3f4f6;
+        }
+
+        /* HEADER STYLES */
+        header {
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        header nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        header nav a:active {
+            transform: translateY(0);
+        }
+
+        /* Active link effect */
+        header nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 80%;
+            height: 2px;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        header nav a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Logout button special style */
+        header nav a[href="logout.php"] {
+            background: rgba(220, 38, 38, 0.8);
+            margin-left: 10px;
+        }
+
+        header nav a[href="logout.php"]:hover {
+                     background: rgba(220, 38, 38, 1);
+                 }
+                 /*  ////////////////////////////////////////////////*/
+                 
+         
+         /* ========================================
+            GENERAL STYLES
+         ======================================== */
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+         }
+         
+         body {
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             min-height: 100vh;
+             padding: 20px;
+             color: #333;
+         }
+         
+         /* ========================================
+            FORM CONTAINER
+         ======================================== */
+         .form-container {
+             max-width: 800px;
+             margin: 30px auto;
+             background: white;
+             padding: 40px;
+             border-radius: 15px;
+             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+             animation: slideIn 0.5s ease-out;
+         }
+         
+         @keyframes slideIn {
+             from {
+                 opacity: 0;
+                 transform: translateY(-30px);
+             }
+             to {
+                 opacity: 1;
+                 transform: translateY(0);
+             }
+         }
+         
+         .form-container h2 {
+             color: #667eea;
+             margin-bottom: 30px;
+             font-size: 28px;
+             text-align: center;
+             font-weight: 600;
+             border-bottom: 3px solid #667eea;
+             padding-bottom: 15px;
+         }
+         
+         /* ========================================
+            FORM STYLES
+         ======================================== */
+         .course-form {
+             display: flex;
+             flex-direction: column;
+             gap: 25px;
+         }
+         
+         .form-group {
+             display: flex;
+             flex-direction: column;
+             gap: 8px;
+         }
+         
+         .form-group label {
+             font-weight: 600;
+             color: #555;
+             font-size: 15px;
+             display: flex;
+             align-items: center;
+             gap: 5px;
+         }
+         
+         .form-group label::before {
+             content: '📝';
+             font-size: 16px;
+         }
+         
+         .form-group input[type="text"],
+         .form-group input[type="date"],
+         .form-group input[type="file"],
+         .form-group textarea,
+         .form-group select {
+             padding: 12px 15px;
+             border: 2px solid #e0e0e0;
+             border-radius: 8px;
+             font-size: 15px;
+             font-family: inherit;
+             transition: all 0.3s ease;
+             background: #fafafa;
+         }
+         
+         .form-group input:focus,
+         .form-group textarea:focus,
+         .form-group select:focus {
+             outline: none;
+             border-color: #667eea;
+             background: white;
+             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+         }
+         
+         .form-group textarea {
+             resize: vertical;
+             min-height: 120px;
+             line-height: 1.6;
+         }
+         
+         .form-group select {
+             cursor: pointer;
+             appearance: none;
+             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+             background-repeat: no-repeat;
+             background-position: right 15px center;
+             padding-right: 40px;
+         }
+         
+         .form-group input[type="file"] {
+             cursor: pointer;
+             padding: 10px;
+         }
+         
+         .form-group input[type="file"]::file-selector-button {
+             padding: 8px 16px;
+             background: #667eea;
+             color: white;
+             border: none;
+             border-radius: 5px;
+             cursor: pointer;
+             margin-right: 10px;
+             font-weight: 600;
+             transition: all 0.3s;
+         }
+         
+         .form-group input[type="file"]::file-selector-button:hover {
+             background: #5568d3;
+             transform: translateY(-2px);
+         }
+         
+         .form-group small {
+             color: #999;
+             font-size: 13px;
+             margin-top: 5px;
+         }
+         
+         /* ========================================
+            ERROR MESSAGES
+         ======================================== */
+         .error {
+             color: #dc3545;
+             font-size: 13px;
+             margin-top: 5px;
+             padding: 8px 12px;
+             background: #ffe6e6;
+             border-left: 4px solid #dc3545;
+             border-radius: 4px;
+             display: flex;
+             align-items: center;
+             gap: 8px;
+             animation: shake 0.5s;
+         }
+         
+         @keyframes shake {
+             0%, 100% { transform: translateX(0); }
+             25% { transform: translateX(-5px); }
+             75% { transform: translateX(5px); }
+         }
+         
+         /* ========================================
+            BUTTONS
+         ======================================== */
+         .form-actions {
+             display: flex;
+             gap: 15px;
+             margin-top: 10px;
+         }
+         
+         .submit-btn,
+         .cancel-btn {
+             padding: 14px 30px;
+             border: none;
+             border-radius: 8px;
+             font-size: 16px;
+             font-weight: 600;
+             cursor: pointer;
+             transition: all 0.3s ease;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             gap: 8px;
+             flex: 1;
+         }
+         
+         .submit-btn {
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             color: white;
+             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+         }
+         
+         .submit-btn:hover {
+             transform: translateY(-3px);
+             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+         }
+         
+         .submit-btn:active {
+             transform: translateY(-1px);
+         }
+         
+         .cancel-btn {
+             background: #f0f0f0;
+             color: #666;
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+         }
+         
+         .cancel-btn:hover {
+             background: #e0e0e0;
+             transform: translateY(-3px);
+         }
+         
+         a {
+             text-decoration: none;
+         }
+         
+         /* ========================================
+            TABLE CONTAINER
+         ======================================== */
+         .table-container {
+             max-width: 1400px;
+             margin: 30px auto;
+             background: white;
+             padding: 30px;
+             border-radius: 15px;
+             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+             animation: fadeIn 0.6s ease-out;
+         }
+         
+         @keyframes fadeIn {
+             from {
+                 opacity: 0;
+                 transform: scale(0.95);
+             }
+             to {
+                 opacity: 1;
+                 transform: scale(1);
+             }
+         }
+         
+         .table-container h2 {
+             color: #667eea;
+             margin-bottom: 25px;
+             font-size: 28px;
+             font-weight: 600;
+         }
+         
+         /* ========================================
+            TABLE STYLES
+         ======================================== */
+         .course-table {
+             width: 100%;
+             border-collapse: collapse;
+             background: white;
+             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+             border-radius: 10px;
+             overflow: hidden;
+         }
+         
+         .course-table thead {
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             color: white;
+         }
+         
+         .course-table thead th {
+             padding: 18px 15px;
+             text-align: left;
+             font-weight: 600;
+             font-size: 14px;
+             text-transform: uppercase;
+             letter-spacing: 0.5px;
+         }
+         
+         .course-table tbody tr {
+             border-bottom: 1px solid #e0e0e0;
+             transition: all 0.3s ease;
+         }
+         
+         .course-table tbody tr:nth-child(even) {
+             background: #f8f9fa;
+         }
+         
+         .course-table tbody tr:hover {
+             background: #f0f4ff;
+             transform: scale(1.01);
+             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+         }
+         
+         .course-table tbody td {
+             padding: 18px 15px;
+             font-size: 14px;
+             color: #555;
+         }
+         
+         .course-table tbody td img {
+             width: 70px;
+             height: 70px;
+             object-fit: cover;
+             border-radius: 10px;
+             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+             transition: transform 0.3s ease;
+         }
+         
+         .course-table tbody td img:hover {
+             transform: scale(1.2);
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+         }
+         
+         /* ========================================
+            PRIMARY BUTTON (Add Course)
+         ======================================== */
+         .btn-primary {
+             padding: 12px 25px;
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             color: white;
+             border: none;
+             border-radius: 8px;
+             font-weight: 600;
+             font-size: 15px;
+             cursor: pointer;
+             transition: all 0.3s ease;
+             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+             display: inline-flex;
+             align-items: center;
+             gap: 8px;
+         }
+         
+         .btn-primary:hover {
+             transform: translateY(-3px);
+             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+         }
+         
+         /* ========================================
+            RESPONSIVE DESIGN
+         ======================================== */
+         @media (max-width: 1200px) {
+             .course-table {
+                 font-size: 13px;
+             }
+             
+             .course-table thead th,
+             .course-table tbody td {
+                 padding: 12px 10px;
+             }
+         }
+         
+         @media (max-width: 992px) {
+             .table-container {
+                 overflow-x: auto;
+             }
+             
+             .course-table {
+                 min-width: 900px;
+             }
+         }
+         
+         @media (max-width: 768px) {
+             .form-container {
+                 padding: 25px;
+                 margin: 15px;
+             }
+             
+             .table-container {
+                 padding: 20px;
+                 margin: 15px;
+             }
+             
+             .form-actions {
+                 flex-direction: column;
+             }
+             
+             .submit-btn,
+             .cancel-btn {
+                 width: 100%;
+             }
+         
+             .edit-btn,
+             .delete-btn {
+                 width: 100%;
+                 justify-content: center;
+             }
+         }
+         
+         @media (max-width: 576px) {
+             .form-container h2,
+             .table-container h2 {
+                 font-size: 22px;
+             }
+             
+             body {
+                 padding: 10px;
+             }
+             
+             .course-table tbody td img {
+                 width: 50px;
+                 height: 50px;
+             }
+         }
+         
+         /* ========================================
+            TRANSITIONS & ANIMATIONS
+         ======================================== */
+         * {
+             transition: background-color 0.3s ease, color 0.3s ease;
+         }
+         
+         button,
+         a,
+         input,
+         select,
+         textarea {
+             transition: all 0.3s ease;
+         }
+         
+         /* style btn enrollemnt courses_list.php */
+         .btn-enroll {
+             background: #10b981;
+             color: white;
+             padding: 8px 16px;
+             text-decoration: none;
+             border-radius: 5px;
+             font-size: 14px;
+             display: inline-block;
+         }
+         
+          .btn-enroll:hover {
+          background: #059669;
+         }
+
+        /* ////////////////////////////////////////////////////////////////////////// */
+</style>
 </head>
 <body>
 
     <!-- HEADER -->
     <header>
-        <div class="logo">MyCourses</div>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">Courses</a>
+            <a href="courses_list.php">Home</a>
+            <a href="stats_dashboard.php">Stats</a>
+            <a href="my_courses.php">My Courses</a>
+            <a href="logout.php">Logout</a>
         </nav>
     </header>
 
     <!-- MAIN CONTENT (placeholder) -->
     <main style="padding: 40px; text-align:center;">
-        <h1>Welcome to MyCourses</h1>
-        <p>Your learning journey starts here.</p>
+        <!-- <h1>Welcome to MyCourses</h1>
+        <p>Your learning journey starts here.</p> -->
 

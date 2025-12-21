@@ -1,5 +1,6 @@
 <?php
 include "config.php";
+include "sessions.php";
 
 // Verifier if ID en URL 
 if (!isset($_GET['id'])) {

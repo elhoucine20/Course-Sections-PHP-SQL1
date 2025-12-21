@@ -1,6 +1,8 @@
 <?php
+include "sessions.php";
 include "header.php";
 include "config.php";
+
 
 $mysql = 'SELECT * FROM courses';
 $produis = mysqli_query($connect, $mysql);
@@ -40,6 +42,10 @@ $dataa = mysqli_fetch_all($produis, MYSQLI_ASSOC);
                        onclick="return confirm('est ce que vous avais supprimer cette cours ?')">
                          Supprimer
                     </a>
+                    <a href="add_to_my_courses.php?id=<?= $elemnt['id'] ?>">
+                         <img style="width:40px;height:40px" src="plus.jpg" alt="mon course">
+                    </a>
+            
                 </td>
             </tr>
             <?php } 

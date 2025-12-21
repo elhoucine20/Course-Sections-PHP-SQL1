@@ -1,14 +1,13 @@
 
 <?php
 include "config.php";
-// include "header.php";
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inscription Utilisateur</title>
+  <title>Inscription Utilisateur</title> -->
   <style>
     * {
       box-sizing: border-box;
@@ -94,7 +93,7 @@ include "config.php";
       font-weight: bold;
     }
   </style>
-</head>
+<!-- </head> -->
 <body>
 
   <form class="register-card" action="" method="post">
@@ -127,9 +126,9 @@ include "config.php";
 
 <?php
   if(isset($_POST['inscription'])){
-    $name=$_POST['username'];
-    $email=$_POST['email'];
-    $password=$_POST['password'];
+    $name = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
      if(empty($name)){
     echo "name est invalid";
@@ -144,6 +143,8 @@ include "config.php";
   $sqll ="INSERT INTO users(name,email,password)
                        value('$name','$email','$password')";
   $resultt = mysqli_query($connect,$sqll);
+  header("location: login.php");
+
 
   }
 ?>

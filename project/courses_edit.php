@@ -1,5 +1,6 @@
 <?php
 include "config.php";
+include "sessions.php";
 include "header.php";
 
 // verifier if id contien a url
@@ -78,14 +79,38 @@ if (isset($_POST['submit'])) {
             echo "<p style='color:red; padding:10px; background:#f8d7da; border-radius:5px; margin:20px;'> Erreur en la modification: " . mysqli_error($connect) . " </p>";
         }
     }
-}
-?>
+    }
+    // conserve les valeurs en la form pour modifier
+    if (isset($_POST['title'])) {
+    $title = $_POST['title']; //en submit conservee data 
+    } else {
+    $title = $course['title']; 
+    }
+    
+    if (isset($_POST['description'])) {
+    $description = $_POST['description'];
+    } else {
+    $description = $course['description'];
+    }
+    
+    if (isset($_POST['level'])) {
+    $level = $_POST['level'];
+    } else {
+    $level = $course['level'];
+    }
+    
+    if (isset($_POST['created_at'])) {
+    $created_at = $_POST['created_at'];
+    } else {
+    $created_at = date('Y-m-d', strtotime($course['created_at']));
+    }
+        ?>
 
 <section class="form-container">
-   <h2>Modifier le Cours #<?php echo $id; ?></h2>
-
+    <h2>Modifier le Cours #<?php echo $id; ?></h2>
+    
     <form action="" method="POST" class="course-form">
-
+        
         <!-- Title -->
         <div class="form-group">
             <label for="title">Titre </label>
