@@ -10,20 +10,20 @@ if(!isset($_SESSION['emai_l'])){
 }
 
 // Total de Cours
-$TotalCourses = "SELECT COUNT(*) as total FROM courses";
-$resultTotalCourses = mysqli_query($connect, $TotalCourses);
-$totalCourses = mysqli_fetch_assoc($resultTotalCourses)['total'];
+   $TotalCourses = "SELECT COUNT(*) as total FROM courses";
+   $resultTotalCourses = mysqli_query($connect, $TotalCourses);
+   $totalCourses = mysqli_fetch_assoc($resultTotalCourses)['total'];
 
 
 // Total des Utilisateurs 
-$sqlTotalUsers = "SELECT COUNT(*) as total FROM users";
-$resultTotalUsers = mysqli_query($connect, $sqlTotalUsers);
-$totalUsers = mysqli_fetch_assoc($resultTotalUsers)['total'];
+   $sqlTotalUsers = "SELECT COUNT(*) as total FROM users";
+   $resultTotalUsers = mysqli_query($connect, $sqlTotalUsers);
+  $totalUsers = mysqli_fetch_assoc($resultTotalUsers)['total'];
 
-// Total des Inscriptions
-$sqlTotalEnrollments = "SELECT COUNT(*) as total FROM enrollments";
-$resultTotalEnrollments = mysqli_query($connect, $sqlTotalEnrollments);
-$totalEnrollments = mysqli_fetch_assoc($resultTotalEnrollments)['total'];
+ // Total des Inscriptions
+   $sqlTotalEnrollments = "SELECT COUNT(*) as total FROM enrollments";
+   $resultTotalEnrollments = mysqli_query($connect, $sqlTotalEnrollments);
+ $totalEnrollments = mysqli_fetch_assoc($resultTotalEnrollments)['total'];
 
 
 //   Cours le Plus Populaire 
@@ -35,6 +35,39 @@ $sqlPopularCourse = "SELECT courses.title, COUNT(*) as nombre
                      LIMIT 1";
 $resultPopular = mysqli_query($connect, $sqlPopularCourse);
 $popularCourse = mysqli_fetch_assoc($resultPopular);
+
+// Cours Sans inscrire
+$sqlCoursesSansEnrollments = "SELECT courses.id, courses.title, courses.level 
+                                 FROM courses 
+                                 LEFT JOIN enrollments ON courses.id = enrollments.course_id 
+                                 WHERE enrollments.id IS NULL 
+                                 ORDER BY courses.id";
+$resultsqlCoursesSansEnrollments = mysqli_query($connect, $sqlCoursesSansEnrollments);
+
+
+// Utilisateurs inscrire cette annee
+$sqlUsersDansCetteAnne = "SELECT users.name, users.email, users.created_at 
+                     FROM users 
+                     WHERE YEAR(users.created_at) = YEAR(CURDATE())
+                     ORDER BY users.created_at DESC";
+$resultU_D_C_Anne = mysqli_query($connect, $sqlUsersDansCetteAnne);
+
+
+//  Nombre Moyen de Sections par Cours 
+$sqlMoyenneSections = "SELECT COUNT(*) / COUNT(DISTINCT course_id) as moyenne
+    FROM sections";
+
+$resultMoyenneSections = mysqli_query($connect, $sqlMoyenneSections);
+$Moyenne = mysqli_fetch_assoc($resultMoyenneSections)['moyenne'];
+
+
+//  Inscriptions par Cours (Tableau) 
+$sqlEnrollmentsParCourse = "SELECT courses.title, COUNT(enrollments.id) as nombre
+                            FROM courses 
+                            LEFT JOIN enrollments ON courses.id = enrollments.course_id 
+                            GROUP BY courses.id, courses.title 
+                            ORDER BY nombre DESC";
+$resultEnrollmentsParCourse = mysqli_query($connect, $sqlEnrollmentsParCourse);
 
 
 ?>
@@ -267,19 +300,34 @@ $popularCourse = mysqli_fetch_assoc($resultPopular);
             </div>
             <div class="kpi-text">
                 <?php 
-                    echo $popularCourse['title'] . " (" . $popularCourse['nombre'] . ")";
+                    echo $popularCourse['title'] .' '. $popularCourse['nombre'].' fois';
                 ?>
             </div>
         </div>
+
+            <!-- moyenne de course par sections 5 -->
+     <div class="kpi-card">
+        <div class="kpi-card-header">
+            <div class="kpi-icon yellow">📊</div>
+            <h3>Moyenne Sections/Cours</h3>
+        </div>
+        <div class="kpi-number">
+            <?php 
+        echo $Moyenne;
+         ?>
+        </div>
+     </div>
     </div>
 
     <!-- Tables Grid -->
     <div class="tables-grid">
         
-        <!-- Inscriptions par cours 5 -->
+              <!-- Inscriptions par cours 5 -->
         <div class="table-section">
             <h2>Inscriptions par Cours</h2>
-        
+            <?php
+             if(mysqli_num_rows($resultEnrollmentsParCourse) > 0){
+                 ?>
             <table>
                 <thead>
                     <tr>
@@ -288,41 +336,30 @@ $popularCourse = mysqli_fetch_assoc($resultPopular);
                     </tr>
                 </thead>
                 <tbody>
-                
+                 <?php
+                  while($coursee = mysqli_fetch_assoc($resultEnrollmentsParCourse)){
+                    ?>
+
                     <tr>
-                        <td>///////////////////////</td>
-                        <td><strong>///////////</strong></td>
+                        <td><?= $coursee['title'] ?></td>
+                        <td><strong><?= $coursee['nombre'] ?></strong></td>
                     </tr>
-                
+                    <?php
+                     }
+                     ?>
                 </tbody>
             </table>
-        
+            <?php
+               }
+          ?>
         </div>
 
 
-        <!-- Cours ayant plus de 5 sections -->
-<div class="table-section">
-    <h2>Cours Ayant Plus de 5 Sections</h2>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Cours</th>
-                    <th>Nombre de Sections</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr>
-                        <td>titre de nomcre sections</td>
-                        <td><strong>NNNNNNNNNN</strong></td>
-                    </tr>
-            </tbody>
-        </table>
-
-</div>
         <!--   users inscrits en cette annee -->
         <div class="table-section">
             <h2>Inscriptions de cette Année</h2>
+            <?php if (mysqli_num_rows($resultU_D_C_Anne) > 0) { ?>
+
             <table>
                 <thead>
                     <tr>
@@ -332,18 +369,25 @@ $popularCourse = mysqli_fetch_assoc($resultPopular);
                     </tr>
                 </thead>
                 <tbody>
-                                    <tr>
-                        <td> hamza </td>
-                        <td>bvjhvb fdc@gmail.com</td>
-                        <td><span class="date-badge">/////////////////////////////////</span></td>
+
+                 <?php while ($user = mysqli_fetch_assoc($resultU_D_C_Anne)) { ?>
+
+                    <tr>
+                    <td><?= $user['name'] ?></td>
+                        <td><?=  $user['email'] ?></td>
+                        <td><span class="badge avance"><?=  $user['created_at'] ?></span></td>
                     </tr>
+                <?php } ?>
                 </tbody>
             </table>
+            <?php } ?>
 </div>
 
-        <!--  Cours sans inscription -->
+          <!--  Cours sans inscription -->
         <div class="table-section">
             <h2>Cours Sans Inscription</h2>
+            <?php if (mysqli_num_rows($resultsqlCoursesSansEnrollments) > 0) { ?>
+
             <table>
                 <thead>
                     <tr>
@@ -353,18 +397,18 @@ $popularCourse = mysqli_fetch_assoc($resultPopular);
                     </tr>
                 </thead>
                 <tbody>
+                 <?php while ($course = mysqli_fetch_assoc($resultsqlCoursesSansEnrollments)) { ?>
+
                     <tr>
-                        <td>8</td>
-                        <td>///////////////////////</td>
-                        <td><span class="badge avance">Avancé</span></td>
+                        <td><?= $course['id'] ?></td>
+                        <td><?=  $course['title'] ?></td>
+                        <td><span class="badge avance"><?=  $course['level'] ?></span></td>
                     </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>/////////////////////</td>
-                        <td><span class="badge avance">Avancé</span></td>
-                    </tr>
+                <?php } ?>
+
                 </tbody>
             </table>
+            <?php }  ?>
         </div>
 
         <!-- Dernieres inscriptions -->
@@ -398,10 +442,10 @@ $popularCourse = mysqli_fetch_assoc($resultPopular);
             </table>
         </div>
 
+
+
     </div>
 </div>
-
-
 </body>
 </html>
 
