@@ -70,6 +70,14 @@ $sqlEnrollmentsParCourse = "SELECT courses.title, COUNT(enrollments.id) as nombr
 $resultEnrollmentsParCourse = mysqli_query($connect, $sqlEnrollmentsParCourse);
 
 
+// derniere inscriptions (2)
+$sqlDernierEnrollments = "SELECT users.name, courses.title, enrollments.enrolled_at 
+                       FROM enrollments 
+                       JOIN users ON users.id = enrollments.user_id 
+                       JOIN courses ON courses.id = enrollments.course_id 
+                       ORDER BY enrollments.enrolled_at DESC 
+                       LIMIT 3";
+$resultDernierEnrollments = mysqli_query($connect, $sqlDernierEnrollments);
 ?>
 
 
@@ -414,32 +422,30 @@ $resultEnrollmentsParCourse = mysqli_query($connect, $sqlEnrollmentsParCourse);
         <!-- Dernieres inscriptions -->
         <div class="table-section">
             <h2>Dernières Inscriptions</h2>
+                <?php if (mysqli_num_rows($resultDernierEnrollments) > 0) { ?>
+
             <table>
                 <thead>
                     <tr>
-                        <th>Étudiant</th>
+                        <th>user</th>
                         <th>Cours</th>
                         <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>/////////////////</td>
-                        <td>Introduction à PHP</td>
-                        <td><span class="date-badge">20/12/2024 14:30</span></td>
+             <?php while ($enrollment = mysqli_fetch_assoc($resultDernierEnrollments)) { ?>
+
+                  <tr>
+                        <td><?= $enrollment['name']; ?></td>
+                        <td><?= $enrollment['title']; ?></td>
+                        <td><span class="date-badge"><?= date('d/m/Y H:i', strtotime($enrollment['enrolled_at'])); ?></span></td>
                     </tr>
-                    <tr>
-                        <td>///////////////////</td>
-                        <td>JavaScript Avancé</td>
-                        <td><span class="date-badge">19/12/2024 16:45</span></td>
-                    </tr>
-                    <tr>
-                        <td>/////////////////</td>
-                        <td>HTML & CSS</td>
-                        <td><span class="date-badge">18/12/2024 10:20</span></td>
-                    </tr>
+                   <?php } ?>
+
                 </tbody>
             </table>
+                <?php } ?>
+
         </div>
 
 
