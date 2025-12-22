@@ -10,18 +10,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$sql = "
-SELECT 
-    courses.id,
-    courses.title,
-    courses.description,
-    courses.level,
-    enrollments.enrolled_at
-FROM courses
- JOIN enrollments
-    ON courses.id = enrollments.course_id
-WHERE enrollments.user_id = $user_id
-";
+$sql = "SELECT courses.id, courses.title, courses.description, courses.level,enrollments.enrolled_at  FROM courses
+         JOIN enrollments   ON courses.id = enrollments.course_id
+         WHERE enrollments.user_id = $user_id ";
 
 $result = mysqli_query($connect, $sql);
 ?>
@@ -43,11 +34,11 @@ $result = mysqli_query($connect, $sql);
             </tr>
         </thead>
         <tbody>
-            <?php while ($course = mysqli_fetch_assoc($result)) { ?>
+            <?php while($course = mysqli_fetch_assoc($result)) { ?>
                 <tr>
-                    <td><?= htmlspecialchars($course['title']) ?></td>
-                    <td><?= htmlspecialchars($course['description']) ?></td>
-                    <td><?= htmlspecialchars($course['level']) ?></td>
+                    <td><?= $course['title']?></td>
+                    <td><?= $course['description']?></td>
+                    <td><?= $course['level']?></td>
                     <td><?= $course['enrolled_at'] ?></td>
                 </tr>
             <?php } ?>

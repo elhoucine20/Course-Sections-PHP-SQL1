@@ -2,12 +2,6 @@
 <?php
 include "config.php";
 ?>
-<!-- <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inscription Utilisateur</title> -->
   <style>
     * {
       box-sizing: border-box;
@@ -93,7 +87,6 @@ include "config.php";
       font-weight: bold;
     }
   </style>
-<!-- </head> -->
 <body>
 
   <form class="register-card" action="" method="post">

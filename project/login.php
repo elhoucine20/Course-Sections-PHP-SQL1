@@ -1,8 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion</title> -->
+
  <style>
         body {
       min-height: 100vh;
@@ -53,9 +49,7 @@
     }
 </style>
 
-<!-- </head> -->
 <body>
-
 <div class="login-box">
     <h2>Login</h2>
 
@@ -68,7 +62,6 @@
         </div>
     </form>
 </div>
-
 </body>
 </html>
 
@@ -76,9 +69,6 @@
     session_start();
     include "config.php";
     
-
-    // echo session_id();
-
     if(isset($_POST['login'])){
 
         $email = $_POST['email'];
@@ -92,7 +82,6 @@
 
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['emai_l'] = $email;
-            // header("location: courses_list.php");
             header("location: courses_list.php");
         }
         else{
