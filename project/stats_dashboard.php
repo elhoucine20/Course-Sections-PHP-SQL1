@@ -1,12 +1,9 @@
 <?php
-
-// echo "uacun statistique"
-
 session_start();
 include "config.php";
 include "header.php";
 
-// Protection
+// if user inscrit
 if(!isset($_SESSION['emai_l'])){
     header("Location: login.php");
     exit();
@@ -27,6 +24,18 @@ $totalUsers = mysqli_fetch_assoc($resultTotalUsers)['total'];
 $sqlTotalEnrollments = "SELECT COUNT(*) as total FROM enrollments";
 $resultTotalEnrollments = mysqli_query($connect, $sqlTotalEnrollments);
 $totalEnrollments = mysqli_fetch_assoc($resultTotalEnrollments)['total'];
+
+
+//   Cours le Plus Populaire 
+$sqlPopularCourse = "SELECT courses.title, COUNT(*) as nombre 
+                     FROM enrollments 
+                     JOIN courses ON courses.id = enrollments.course_id 
+                     GROUP BY courses.id 
+                     ORDER BY nombre DESC 
+                     LIMIT 1";
+$resultPopular = mysqli_query($connect, $sqlPopularCourse);
+$popularCourse = mysqli_fetch_assoc($resultPopular);
+
 
 ?>
 
@@ -250,14 +259,16 @@ $totalEnrollments = mysqli_fetch_assoc($resultTotalEnrollments)['total'];
             <div class="kpi-number"><?php echo $totalEnrollments ?></div>
         </div>
 
-        <!-- Cours le Plus Populaire 4 -->
+          <!-- Cours le Plus Populaire 4 -->
         <div class="kpi-card">
             <div class="kpi-card-header">
                 <div class="kpi-icon orange">🏆</div>
                 <h3>Cours le Plus Populaire</h3>
             </div>
             <div class="kpi-text">
-
+                <?php 
+                    echo $popularCourse['title'] . " (" . $popularCourse['nombre'] . ")";
+                ?>
             </div>
         </div>
     </div>
@@ -393,3 +404,9 @@ $totalEnrollments = mysqli_fetch_assoc($resultTotalEnrollments)['total'];
 
 </body>
 </html>
+
+<!-- natural join -->
+ 
+
+
+
