@@ -82,6 +82,9 @@
 
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['emai_l'] = $email;
+            $_SESSION['login'] = $login;
+
+
             header("location: courses_list.php");
         }
         else{
